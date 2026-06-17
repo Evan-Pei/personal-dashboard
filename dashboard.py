@@ -158,17 +158,20 @@ class PersonalDashboard:
                     label = ttk.Label(self.calendar_frame, text="")
                 else:
                     date_obj = datetime(self.current_date.year, self.current_date.month, day).date()
-                    bg_color = "lightblue" if date_obj == today else ""
-
-                    btn = tk.Label(
-                        self.calendar_frame,
-                        text=str(day),
-                        font=("Arial", 10),
-                        bg=bg_color,
-                        relief=tk.RAISED,
-                        padx=5,
-                        pady=5
-                    )
+                    
+                    btn_config = {
+                        'text': str(day),
+                        'font': ("Arial", 10),
+                        'relief': tk.RAISED,
+                        'padx': 5,
+                        'pady': 5
+                    }
+                    
+                    # Only add bg parameter if it's today
+                    if date_obj == today:
+                        btn_config['bg'] = 'lightblue'
+                    
+                    btn = tk.Label(self.calendar_frame, **btn_config)
                     btn.grid(row=week_num, column=day_num, padx=2, pady=2, sticky="nsew")
 
     def prev_month(self):
